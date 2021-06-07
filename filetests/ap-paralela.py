@@ -24,21 +24,26 @@ def menu():
         print("")
         if str(opc)=="1":
             print(f"Ingreso {opc}")
-            primera.saludar()
+            primera.start()
+            print("======================================")
             break
         elif str(opc)=="2":
             print(f"Ingreso {opc}")
             segunda.despedir()
+            print("======================================")
             break
         elif str(opc)=="3":
             print(f"Ingreso {opc}")
             tercera.preguntar()
+            print("======================================")
             break
         elif str(opc)=="4":
             print("[!] Resultados [!]")
+            print("======================================")
             break
         else:
             print("[~] OPCION INCORRECTA [~]\n")
+            print("======================================")
             continue
 
 
