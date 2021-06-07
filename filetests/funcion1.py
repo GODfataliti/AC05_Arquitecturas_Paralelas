@@ -18,34 +18,31 @@ class clase1:
             promedio+=valor
         
         promedio = promedio/len(datos)
-
-            
         print(f"Proceso Calculo 1: {datos} Promedio: {promedio}")
-        q1.send(promedio,datos)
+        q1.send(promedio)
         q1.close()
-    
+
     #FUNCION 2 VARIANZA
-    def varianza(self,connect1,q2):
-        promeido,list = connect1.recv()
+    def varianza(self,connect1,q2,datos):
+        promedio = connect1.recv()
         varianza = 0
-        for valor in list:
-            varianza+=(valor-promeido)**2
+        for valor in datos:
+            varianza+=(valor-promedio)**2
         
         varianza = varianza/len(datos)
-
-        print(f'Proceso Calculo 2: {datos} Varianza {varianza}')
-        q2.send(varianza,promeido)
+        print(f'Proceso Calculo 2 Varianza {varianza}')
+        q2.send(varianza)
         q2.close()
 
-    #FUNCION 3 COEFICIENTE DE VARIACION
+
+    #FUNCION 3 DESVIACION ESTANDAR
     def cv(self,connect2,q3):
-        varz, prom = connect2.recv()
+        varz = connect2.recv()
         sigma = math.sqrt(varz)
-        cv = (sigma/prom)*100
-        print(f'Pronceso Calculo 3: Coeficiente de variacion {cv}')
-        q3.send(cv)
+        print(f'Pronceso Calculo 3 Desviacion Estandar: {sigma}')
+        q3.send(sigma)
         q3.close()
-    
+        
     #MAIN
     def start(self):
         t= time.time()
@@ -56,7 +53,7 @@ class clase1:
         datos1 = self.generadorRandom()
 
         p1 = Process(target=self.promedio, args=(q1,datos1,))
-        p2 = Process(target=self.varianza, args=(connect1,q2,))
+        p2 = Process(target=self.varianza, args=(connect1,q2,datos1,))
         p3 = Process(target=self.cv, args=(connect2,q3,))
         p1.start()
         p2.start()
@@ -64,7 +61,5 @@ class clase1:
         p1.join()
         p2.join()
         p3.join()
-        print(f'Resultado Final: Lista {datos1} C.V: {connect3.recv()}')
+        print(f'Resultado Final: Lista {datos1} Desviacion Estandar: {connect3.recv()}')
         print(f'Tiempo de Ejecucion: {time.time()-t}\n')
-    
-
