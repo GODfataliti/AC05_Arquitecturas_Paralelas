@@ -23,7 +23,6 @@ def menu():
         opc = input()
         print("")
         if str(opc)=="1":
-            print(f"Ingreso {opc}")
             primera.start()
             print("======================================")
             break
