@@ -5,19 +5,21 @@ from funcion2 import clase2
 from funcion3 import clase3
 
 # VARIABLES GLOBALES
-primera = clase1()
-segunda = clase2()
-tercera = clase3()
+primera = clase1() #PIPE
+segunda = clase2() #PIPE
+tercera = clase3() #COLA
 
 
 # MENU
 def menu():
     while True:
-        print("[1] Ingresar Problema 1")
-        print("[2] Ingresar Problema 2")
-        print("[3] Ingresar Problema 3")
+        print("======================================")
+        print("[1] Ingresar Problema [1]")
+        print("[2] Ingresar Problema [2]")
+        print("[3] Ingresar Problema [3]")
+        print("[4] Resultados [4]")
 
-        print('Ingrese una opcion: ', end="")
+        print('[!] Ingrese una opcion [>]: ', end="")
         opc = input()
         print("")
         if str(opc)=="1":
@@ -32,16 +34,20 @@ def menu():
             print(f"Ingreso {opc}")
             tercera.preguntar()
             break
+        elif str(opc)=="4":
+            print("[!] Resultados [!]")
+            break
         else:
             print("[~] OPCION INCORRECTA [~]\n")
             continue
 
 
-
 # MAIN
+# UNIR CON JOIN AL FINAL.
 def main():
+    tm = time.time()
     menu()
-    print("\n")
+    print(f'Tiempo: {time.time() - tm} \n')
 
 
 if __name__ == "__main__":
