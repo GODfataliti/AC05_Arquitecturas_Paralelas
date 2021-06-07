@@ -62,4 +62,4 @@ class clase1:
         p2.join()
         p3.join()
         print(f'Resultado Final: Lista {datos1} Desviacion Estandar: {connect3.recv()}')
-        print(f'Tiempo de Ejecucion: {time.time()-t}\n')
+        print(f'Tiempo de Ejecucion 1: {time.time()-t}\n')
