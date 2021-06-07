@@ -27,13 +27,11 @@ def menu():
             print("======================================")
             break
         elif str(opc)=="2":
-            print(f"Ingreso {opc}")
-            segunda.despedir()
+            segunda.start()
             print("======================================")
             break
         elif str(opc)=="3":
-            print(f"Ingreso {opc}")
-            tercera.preguntar()
+            tercera.start()
             print("======================================")
             break
         elif str(opc)=="4":
