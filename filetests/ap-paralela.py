@@ -12,36 +12,39 @@ tercera = clase3() #COLA
 
 # MENU
 def menu():
-    while True:
-        print("======================================")
-        print("[1] Ingresar Problema [1]")
-        print("[2] Ingresar Problema [2]")
-        print("[3] Ingresar Problema [3]")
-        print("[4]      Salir        [4]")
+    try:
+        while True:
+            print("======================================")
+            print("[1] Ingresar Problema [1]")
+            print("[2] Ingresar Problema [2]")
+            print("[3] Ingresar Problema [3]")
+            print("[4]      Salir        [4]")
 
-        print('[!] Ingrese una opcion [>]: ', end="")
-        opc = input()
-        print("")
-        if str(opc)=="1":
-            primera.start()
-            print("======================================")
-            break
-        elif str(opc)=="2":
-            segunda.start()
-            print("======================================")
-            break
-        elif str(opc)=="3":
-            tercera.start()
-            print("======================================")
-            break
-        elif str(opc)=="4":
-            print("[!] Hasta pronto [!]")
-            print("======================================")
-            break
-        else:
-            print("[~] OPCION INCORRECTA [~]\n")
-            print("======================================")
-            continue
+            print('[!] Ingrese una opcion [>]: ', end="")
+            opc = input()
+            print("")
+            if str(opc)=="1":
+                primera.start()
+                print("======================================")
+                break
+            elif str(opc)=="2":
+                segunda.start()
+                print("======================================")
+                break
+            elif str(opc)=="3":
+                tercera.start()
+                print("======================================")
+                break
+            elif str(opc)=="4":
+                print("[!] Hasta pronto [!]")
+                print("======================================")
+                break
+            else:
+                print("[~] OPCION INCORRECTA [~]\n")
+                print("======================================")
+                continue
+    except Exception as e:
+        print(f"[ERROR] Ha ocurrido un problema: {e} [!]")
 
 
 # MAIN
