@@ -11,51 +11,60 @@ class clase1:
         x = [random.randint(0,15) for _ in range(random.randint(3,8)+1)]
         return x
     
-    #FUNCION 1
-    def cubo(self,q1,list1,datos1):
+    #FUNCION 1 PROMEDIO
+    def promedio(self,q1,datos):
+        promedio = 0
+        for valor in datos:
+            promedio+=valor
+        
+        promedio = promedio/len(datos)
 
-        for x in datos1:
-            Cubo= x**3
-            Proceso = 0
-            list1.append(Cubo)
-            for j in list1:
-                Proceso+=j
-        print(f"Proceso Calculo 1: {Proceso}")
-        q1.send(Proceso)
+            
+        print(f"Proceso Calculo 1: {datos} Promedio: {promedio}")
+        q1.send(promedio,datos)
         q1.close()
     
-    #FUNCION 2
-    def log(self,connect1,q2):
-        x = connect1.recv()
-        x = math.log10(x)
-        print(f'Proceso Calculo 2: {x}')
-        q2.send(x)
-        #q2.close()
+    #FUNCION 2 VARIANZA
+    def varianza(self,connect1,q2):
+        promeido,list = connect1.recv()
+        varianza = 0
+        for valor in list:
+            varianza+=(valor-promeido)**2
+        
+        varianza = varianza/len(datos)
 
-    #FUNCION 3
-    def raizlog(self,connect2,q3):
-        y = connect2.recv()
-        y = math.sqrt(y)
-        print(f'Pronceso Calculo 3: {y}')
-        q3.send(y)
+        print(f'Proceso Calculo 2: {datos} Varianza {varianza}')
+        q2.send(varianza,promeido)
+        q2.close()
+
+    #FUNCION 3 COEFICIENTE DE VARIACION
+    def cv(self,connect2,q3):
+        varz, prom = connect2.recv()
+        sigma = math.sqrt(varz)
+        cv = (sigma/prom)*100
+        print(f'Pronceso Calculo 3: Coeficiente de variacion {cv}')
+        q3.send(cv)
+        q3.close()
     
     #MAIN
     def start(self):
+        t= time.time()
         q1,connect1 = Pipe()
         q2, connect2 = Pipe()
         q3, connect3 = Pipe()
 
         datos1 = self.generadorRandom()
-        datos2 = self.generadorRandom()
-        lista1 = []
-        p1 = Process(target=self.cubo, args=(q1,lista1,datos1,))
-        p2 = Process(target=self.log, args=(connect1,q2,))
-        p3 = Process(target=self.raizlog, args=(connect2,q3,))
+
+        p1 = Process(target=self.promedio, args=(q1,datos1,))
+        p2 = Process(target=self.varianza, args=(connect1,q2,))
+        p3 = Process(target=self.cv, args=(connect2,q3,))
         p1.start()
         p2.start()
         p3.start()
         p1.join()
         p2.join()
         p3.join()
+        print(f'Resultado Final: Lista {datos1} C.V: {connect3.recv()}')
+        print(f'Tiempo de Ejecucion: {time.time()-t}\n')
     
 

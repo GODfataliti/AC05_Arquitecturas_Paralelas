@@ -17,7 +17,7 @@ def menu():
         print("[1] Ingresar Problema [1]")
         print("[2] Ingresar Problema [2]")
         print("[3] Ingresar Problema [3]")
-        print("[4] Resultados [4]")
+        print("[4]      Salir        [4]")
 
         print('[!] Ingrese una opcion [>]: ', end="")
         opc = input()
@@ -38,7 +38,7 @@ def menu():
             print("======================================")
             break
         elif str(opc)=="4":
-            print("[!] Resultados [!]")
+            print("[!] Hasta pronto [!]")
             print("======================================")
             break
         else:
