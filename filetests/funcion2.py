@@ -2,12 +2,13 @@ import time
 from multiprocessing import Process, Pipe, Queue, process
 import math
 import random
+import os
 
 #PIPE
 class clase2:
 
     def generadorRandom(self):
-        x = random.randint(20,100)+1
+        x = random.randint(20,50)+1
         return x
     
     #SUMA DE LOS CUADRADOS
@@ -21,12 +22,12 @@ class clase2:
         q1.close()
     
     #SUMA DE LOS VALORES MULTIPLES
-    def sumaMultiples(self,q2,connect1,a,b):
-        num = connect1.recv()
+    def sumaMultiples(self,q2,a,b,num):
+        num = num
         prime = a
         secon = b
         number = 0
-        for valor in range(num):
+        for valor in range(num+1):
             if(valor%prime==0):
                 number+=valor
             
@@ -36,13 +37,13 @@ class clase2:
             if (valor%(prime*secon)==0):
                 number-=valor
 
-        print(f"[2] Proceso Calculo 2 - Suma de los Multiples: {number}")
+        print(f"[2] Proceso Calculo 2 - Suma de los Multiplos: {number}")
         q2.send(number)
         q2.close()
     
     #LOGARITMO DEL VALOR
-    def logValor(self,q3,connect2):
-        valor = connect2.recv()
+    def logValor(self,q3,num):
+        valor = num
         v_log = math.log10(valor)
         print(f"[2] Proceso Calculo 3 - Logaritmo: {v_log}")
         q3.send(v_log)
@@ -56,16 +57,23 @@ class clase2:
         q3, connect3 = Pipe()
 
         dato = self.generadorRandom()
-        a = 3
-        b = 5
+        a = 15
+        b = 7
+        print(f"[2] VALOR TOMADO: {dato}  [2]")
 
         p1 = Process(target=self.SumaCuadrados, args=(q1,dato,))
-        p2 = Process(target=self.sumaMultiples, args=(q2,connect1,a,b,))
-        p3 = Process(target=self.logValor, args=(q3,connect2,))
+        p2 = Process(target=self.sumaMultiples, args=(q2,a,b,dato,))
+        p3 = Process(target=self.logValor, args=(q3,dato,))
         p1.start()
         p2.start()
         p3.start()
         p1.join()
         p2.join()
         p3.join()
+
+        diferencia = (connect1.recv() - connect2.recv()) + round(connect3.recv(),3)
+
+        print(f'[2] Diferencia de valores: {diferencia} [2]\n')
+
+
         print(f'[2] Tiempo de Ejecucion 1: {time.time()-t} seg. [2]\n')

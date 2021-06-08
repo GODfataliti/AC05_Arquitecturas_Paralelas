@@ -4,11 +4,13 @@ import os
 from funcion1 import clase1
 from funcion2 import clase2
 from funcion3 import clase3
+from funcion4 import clase4
 
 # VARIABLES GLOBALES
 primera = clase1() #PIPE
 segunda = clase2() #PIPE
 tercera = clase3() #COLA
+cuarta = clase4()
 
 
 # MENU
@@ -25,7 +27,7 @@ def menu():
             opc = input()
             print("")
             if str(opc)=="1":
-                primera.start()
+                cuarta.start()
                 print("======================================")
                 break
             elif str(opc)=="2":
@@ -53,7 +55,7 @@ def menu():
 def main():
     tm = time.time()
     menu()
-    print(f'Tiempo: {time.time() - tm} \n')
+    #print(f'Tiempo: {time.time() - tm} \n')
 
 
 if __name__ == "__main__":

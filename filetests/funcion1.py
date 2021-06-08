@@ -2,6 +2,7 @@ import time
 from multiprocessing import Process, Pipe, Queue, process
 import math
 import random
+import os
 
 #PIPE
 class clase1:
@@ -61,5 +62,13 @@ class clase1:
         p1.join()
         p2.join()
         p3.join()
-        print(f'[1] Resultado Final: Lista {datos1} Desviacion Estandar: {connect3.recv()}')
+
+        #varianza = connect2.recv()
+        promedio = connect1.recv()
+        desviacion = connect3.recv()
+        cv = (desviacion/promedio)*100
+
+
+
+        print(f'[1] Resultado Final: Lista {datos1} CV: {cv}')
         print(f'[1] Tiempo de Ejecucion 1: {time.time()-t} seg. [1]\n')
