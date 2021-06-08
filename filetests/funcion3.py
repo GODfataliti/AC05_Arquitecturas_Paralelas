@@ -1,5 +1,6 @@
 import time
 from multiprocessing import Process, Queue
+import os
 
 #COLA
 class clase3:

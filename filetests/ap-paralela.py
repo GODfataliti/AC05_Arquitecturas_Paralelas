@@ -1,5 +1,6 @@
 import time
 from multiprocessing import Process, Queue
+import os
 from funcion1 import clase1
 from funcion2 import clase2
 from funcion3 import clase3
