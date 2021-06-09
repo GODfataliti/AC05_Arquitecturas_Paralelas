@@ -1,5 +1,5 @@
 import time
-from multiprocessing import Process, Queue, process
+from multiprocessing import Process, Queue
 import random
 import os
 
