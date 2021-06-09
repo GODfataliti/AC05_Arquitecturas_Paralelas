@@ -19,7 +19,7 @@ class clase1:
             promedio+=valor
         
         promedio = promedio/len(datos)
-        print(f"[1] Proceso Calculo 1: {datos} - Promedio: {promedio}")
+        print(f"[1] Proceso Calculo 1: {datos} - Promedio: {promedio} [1]")
         q1.send(promedio)
         q1.close()
 
@@ -31,7 +31,7 @@ class clase1:
             varianza+=(valor-promedio)**2
         
         varianza = varianza/len(datos)
-        print(f'[1] Proceso Calculo 2 - Varianza: {varianza}')
+        print(f'[1] Proceso Calculo 2 - Varianza: {varianza} [1]')
         q2.send(varianza)
         q2.close()
 
@@ -40,7 +40,7 @@ class clase1:
     def cv(self,connect2,q3):
         varz = connect2.recv()
         sigma = math.sqrt(varz)
-        print(f'[1] Pronceso Calculo 3 - Desviacion Estandar: {sigma}')
+        print(f'[1] Pronceso Calculo 3 - Desviacion Estandar: {sigma} [1]')
         q3.send(sigma)
         q3.close()
         
@@ -70,5 +70,5 @@ class clase1:
 
 
 
-        print(f'[1] Resultado Final: Lista {datos1} CV: {cv}')
+        print(f'[1] Resultado Final: Lista {datos1} CV: {cv} [1]')
         print(f'[1] Tiempo de Ejecucion 1: {time.time()-t} seg. [1]\n')

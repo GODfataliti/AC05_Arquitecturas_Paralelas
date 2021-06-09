@@ -1,6 +1,8 @@
 from multiprocessing import Process, Pipe, Queue
 import math
 import time
+import random
+import os
 
 Base_triangulo = 5
 Altura_triangulo = 7
@@ -18,21 +20,21 @@ class clase4:
     #Función que calcula el area del triangulo
     def f1(self,q1,Base_triangulo,Altura_triangulo):
         Area_Triangulo = (Base_triangulo*Altura_triangulo)/2
-        print(f"[1] Proceso del cálculo 1 - Area Triangulo: {Area_Triangulo}   [1]")
+        print(f"[1] Proceso del cálculo 1 - Area Triangulo: {Area_Triangulo}   PID:{os.getpid()} [1]")
         q1.send(Area_Triangulo)
         q1.close()
 
     #Función que calcula el area del cuadrado
     def f2(self,q2,Lado_Cuadrado):
         Area_Cuadradro = Lado_Cuadrado*Lado_Cuadrado
-        print(f"[1] Proceso del cálculo 2 - Area Cuadrado: {Area_Cuadradro}      [1]")
+        print(f"[1] Proceso del cálculo 2 - Area Cuadrado: {Area_Cuadradro}      PID:{os.getpid()} [1]")
         q2.send(Area_Cuadradro)
         q2.close()
     
     #Función que calcula el area del rectangulo
     def f3(self,q3,Ancho_rectangulo,Largo_rectangulo):
         Area_Rectangulo = Ancho_rectangulo*Largo_rectangulo
-        print(f"[1] Proceso del cálculo 3 - Area Rectangulo: {Area_Rectangulo}    [1]")
+        print(f"[1] Proceso del cálculo 3 - Area Rectangulo: {Area_Rectangulo}    PID:{os.getpid()} [1]")
         q3.send(Area_Rectangulo)
         q3.close()
     
@@ -53,5 +55,5 @@ class clase4:
         p2.join()
         p3.join()
         Suma_area = conne1.recv()+conne2.recv()+conne3.recv()
-        print(f"[1] La suma de las areas de las figuras geométricas es: {Suma_area}  [1]")
+        print(f"[1] La suma de las areas de las figuras geométricas es: {Suma_area}  PID:{os.getpid()} [1]")
         print(f"[1] Tiempo de ejecución: {time.time()-t} seg.   [1]\n")

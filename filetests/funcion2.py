@@ -17,7 +17,7 @@ class clase2:
         for valor in range (0,num+1):
             summation+=valor**2
         
-        print(f"[2] Proceso Calculo 1 - Suma de los Cuadrados: {summation}")
+        print(f"[2] Proceso Calculo 1 - Suma de los Cuadrados: {summation}    PID:{os.getpid()} [2]")
         q1.send(summation)
         q1.close()
     
@@ -37,7 +37,7 @@ class clase2:
             if (valor%(prime*secon)==0):
                 number-=valor
 
-        print(f"[2] Proceso Calculo 2 - Suma de los Multiplos: {number}")
+        print(f"[2] Proceso Calculo 2 - Suma de los Multiplos: {number}      PID:{os.getpid()} [2]")
         q2.send(number)
         q2.close()
     
@@ -45,7 +45,7 @@ class clase2:
     def logValor(self,q3,num):
         valor = num
         v_log = math.log10(valor)
-        print(f"[2] Proceso Calculo 3 - Logaritmo: {v_log}")
+        print(f"[2] Proceso Calculo 3 - Logaritmo: {v_log}    PID:{os.getpid()} [2]")
         q3.send(v_log)
         q3.close()
     
@@ -59,7 +59,7 @@ class clase2:
         dato = self.generadorRandom()
         a = 15
         b = 7
-        print(f"[2] VALOR TOMADO: {dato}  [2]")
+        print(f"[2] VALOR TOMADO: {dato}    [2]")
 
         p1 = Process(target=self.SumaCuadrados, args=(q1,dato,))
         p2 = Process(target=self.sumaMultiples, args=(q2,a,b,dato,))
@@ -71,9 +71,9 @@ class clase2:
         p2.join()
         p3.join()
 
-        diferencia = (connect1.recv() - connect2.recv()) + round(connect3.recv(),3)
+        diferencia = (connect1.recv() - connect2.recv()) - round(connect3.recv(),3)
 
-        print(f'[2] Diferencia de valores: {diferencia} [2]\n')
+        print(f'[2] Diferencia de valores: {diferencia}     PID:{os.getpid()} [2]\n')
 
 
         print(f'[2] Tiempo de Ejecucion 1: {time.time()-t} seg. [2]\n')
